@@ -1,0 +1,38 @@
+/* ----- NATIVE HTML ----- */
+
+/* sets margin to zero to make positioning easier */
+/* set font to monospace - colour white */
+* {
+    margin: 0;
+    font-family:monospace;
+    color: #ffffff
+}
+
+/* sets the body size and background colour */
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: #363537;
+}
+
+/* sets the dimensions of the header */
+header {
+    width: 100%;
+    height: 5%;
+    border-bottom: #ed7d3a solid 2px;
+}
+
+/* sets the dimensions of the footer */
+footer {
+    width: 100%;
+    height: 5%;
+    border-top: #ed7d3a solid 2px;
+}
+
+/* ----- IDS ----- */
+
+/* container for everything inbetween the header and footer */
+#container {
+    width: 100%;
+    height: 90%;
+}
