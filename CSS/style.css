@@ -5,7 +5,17 @@
 * {
     margin: 0;
     font-family:monospace;
-    color: #ffffff
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+p {
+    margin: 5px
+}
+
+/* sets the size of the header text */
+h1 {
+    font-size: 3vw;
 }
 
 /* sets the body size and background colour */
@@ -18,21 +28,203 @@ body {
 /* sets the dimensions of the header */
 header {
     width: 100%;
-    height: 5%;
+    height: 7.5%;
     border-bottom: #ed7d3a solid 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* sets the dimensions of the footer */
 footer {
     width: 100%;
-    height: 5%;
+    height: 7.5%;
     border-top: #ed7d3a solid 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2vw;
 }
 
+
+
+/* ----- CLASSES ----- */
+
+/* UTILITY */
+
+/* auto sets flex with both align and justify */
+.U-flexAlignJustify {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* auto sets flex with align */
+.U-flexAlign {
+    display: flex;
+    align-items: center;
+}
+
+/* sets width of the ID row in the song box */
+.U-songBoxColID {
+    width: 5%;
+    height: 100%;
+}
+
+/* sets width of the image row in the song box */
+.U-songBoxColImage {
+    width: 10%;
+    height: 100%;
+}
+
+/* sets width of the name and artist row in the song box */
+.U-songBoxColText {
+    width: 35%;
+    height: 100%;
+}
+
+/* sets width of the time row in the song box */
+.U-songBoxColTime {
+    width: 15%;
+    height: 100%;
+}
+
+
+
+/* MAIN CONTENT */
+
+/* defines the row that holds the track data */
+.songBox__trackList__track {
+    height: 15%;
+    width: 100%;
+    flex-shrink: 0;
+    font-size: 1.5vw;
+}
+
+/* when hovering over a track highlight it */
+.songBox__trackList__track:hover {
+    background-color: rgba(239, 45, 86, 0.2);
+}
+
+/* when clciking on a track highlight it more than hovering */
+.songBox__trackList__track:active {
+    background-color: rgba(239, 45, 86, 0.5);
+}
+
+/* defines the area the image will remain within */
+.songBox__trackList__track__image__container {
+    height: 90%;
+    width: 90%;
+}
+
+/* the image in the track row */
+.songBox__trackList__track__image__container img {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border: #ed7d3a solid 2px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* FOOTER */
+
+/* container for the buttons in the footer */
+.footer__containerButtons {
+    height: 100%;
+    width: 10%;
+    justify-content: space-around;
+}
+
+/* sets the size of the buttons in the footer */
+.footer__containerButton__buttonImage {
+    height: 30px;
+}
+
+/* continer for at the edges of the footer */
+.footer__containerEdges {
+    height: 100%;
+    width: 15%;
+}
+
+/* add margin to the left edge of the footer */
+.footer__containerEdges.U-flexAlign p {
+    margin-left: 5%;
+}
+
+
+
 /* ----- IDS ----- */
+
+/* MAIN CONTENT */
 
 /* container for everything inbetween the header and footer */
 #container {
     width: 100%;
+    height: 85%;
+}
+
+/* creates the box in the middle which will contain the song */
+#songBox {
     height: 90%;
+    width: 80%;
+    border: #ed7d3a solid 2px;
+    flex-direction: column;
+}
+
+/* creates the info row at the top of the songbox */
+#songBox__infoRow {
+    height: 5%;
+    width: 100%;
+    border-bottom: #ed7d3a solid 2px;
+    display: flex;
+    flex-direction: row;
+    font-size: 1vw;
+}
+
+/* the box within the song box that allows user to view the songs */
+#songBox__trackList {
+    height: 95%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+
+/* FOOTER */
+
+/* container for the seek bar and times in the footer */
+#footer__containerCenter {
+    height:100%;
+    width:50%;
+}
+
+/* styles the seekbar in the footer */
+#songBar {
+    appearance: none;
+    width: 80%;
+    margin: 1%;
+    margin-right: 1%;
+    border-radius: 10px;
+    border: #ed7d3a solid 2px;
+    accent-color: #ef2d56;
+}
+
+/* ensure the background is white when seekbar is disabled */
+#songBar:disabled {
+    background-color: #ffffff;
+}
+
+/* styles the seekbar in the footer */
+#soundBar {
+    appearance: none;
+    width: 8vw;
+    margin: 1%;
+    margin-right: 1%;
+    border-radius: 10px;
+    border: #ed7d3a solid 2px;
+    accent-color: #ef2d56;
 }

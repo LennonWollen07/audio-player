@@ -5,15 +5,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Audio Player</title>
+    <title>Lennon's Audio Player</title>
     <link rel="stylesheet" href="/CSS/style.css">
-    <scirpt src="/JS/audioplayer.js" defer></scirpt>
+    <script src="/JS/audioplayer.js" defer></script>
 </head>
 
 <body>
-    <header></header>
-    <div id="container"></div>
-    <footer></footer>
+
+    <!-- the header at the top of the page -->
+    <header>
+
+        <h1>Lennon's Audio Player</h1>
+
+    </header>
+
+    <!-- all the content between the header and footer -->
+    <div class="U-flexAlignJustify" id="container">
+
+        <!-- the center box where the track list is -->
+        <div class="U-flexAlign" id="songBox">
+
+            <!-- the info row at the top of the songbox which gives infomation -->
+            <div id="songBox__infoRow">
+
+                <!-- ID section -->
+                <div class="U-flexAlignJustify U-songBoxColID">
+
+                    <p>ID</p>
+
+                </div>
+
+                <!-- image section  -->
+                <div class="U-flexAlignJustify U-songBoxColImage"></div>
+
+                <!-- name section -->
+                <div class="U-flexAlign U-songBoxColText">
+
+                    <p>Name</p>
+
+                </div>
+
+                <!-- artist section -->
+                <div class="U-flexAlign U-songBoxColText">
+
+                    <p>Artist</p>
+
+                </div>
+
+                <!-- length section -->
+                <div class="U-flexAlign U-songBoxColTime">
+
+                    <p>Length</p>
+
+                </div>
+
+            </div>
+
+            <!-- the tracklist which contains the songs -->
+            <div id="songBox__trackList"></div>
+
+        </div>
+
+    </div>
+
+    <!-- the footer -->
+    <footer>
+
+        <!-- current song section -->
+        <div class="footer__containerEdges U-flexAlign">
+
+            <p>Playing:</p>
+            <p>None</p>
+
+        </div>
+
+        <!-- play/pause and previous song section -->
+        <div class="footer__containerButtons U-flexAlign">
+
+            <img src="/Images/buttons/play.png" class="footer__containerButton__buttonImage">
+            <img src="/Images/buttons/previous.png" class="footer__containerButton__buttonImage">
+
+        </div>
+
+        <!-- song time and seekbar section -->
+        <div class="U-flexAlignJustify" id="footer__containerCenter">
+
+            <p>0:00</p>
+            <input id="songBar" type="range" min="0" value="0" disabled>
+            <p>0:00</p>
+
+        </div>
+
+        <!-- next and repeat button section -->
+        <div class="footer__containerButtons U-flexAlign">
+
+            <img src="/Images/buttons/next.png" class="footer__containerButton__buttonImage">
+            <img src="/Images/buttons/repeat-off.png" class="footer__containerButton__buttonImage">
+
+        </div>
+        
+        <!-- volume control section -->
+        <div class="footer__containerEdges U-flexAlignJustify">
+
+            <p>Volume:</p>
+            <input id="soundBar" type="range" min="0" value="0">
+
+        </div>
+
+    </footer>
+
 </body>
 
 </html>
