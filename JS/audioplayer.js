@@ -19,6 +19,7 @@ let currentSong = null
 let trackRow = null;
 let repeatMode = "repeat"
 let volumeTracker = 1;
+let isSeeking = false;
 
 
 
@@ -342,6 +343,8 @@ soundBar.oninput = function() {
     volumeTracker = soundBar.value / 100
 
 };
+
+// --- SEEKBAR FUNCTIONS ---
 
 
 
