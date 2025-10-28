@@ -147,7 +147,7 @@ footer {
 
 /* sets the size of the buttons in the footer */
 .footer__containerButton__buttonImage {
-    height: 30px;
+    height: 50px;
 }
 
 /* when hovering set make the button translucent */
@@ -168,7 +168,9 @@ footer {
     width: 15%;
 }
 
+/* defines what the 2 seekbars look like */
 .seekBar {
+    height: 1vw;
     appearance: none;
     margin: 1%;
     margin-right: 1%;
@@ -192,7 +194,7 @@ footer {
 /* creates the box in the middle which will contain the song */
 #songBox {
     height: 90%;
-    width: 80%;
+    width: 70%;
     border: #ed7d3a solid 2px;
     flex-direction: column;
 }

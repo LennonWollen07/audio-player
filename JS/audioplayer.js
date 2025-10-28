@@ -7,6 +7,7 @@ const songs = [
                 ["/music/Sunburn.mp3","/Images/songs/Sunburn.png","Sunburn","The Living Tombstone"],
                 ["/music/World.execute(me).mp3","Images/songs/World.execute(me).png","World.execute(me)","Mili"],
                 ["/music/Pain.mp3","/Images/songs/Pain.png","ペイン(Pain)","MILGRAM"],
+                ["/music/Changeling.mp3","/Images/songs/Changeling.png","Changeling","Lydia the Bard"],
                 ["/music/My_Love_is_Sick.mp3","/Images/songs/My_Love_is_Sick.png","My Love is Sick","Madds Buckley"],
                 ["/music/The_Subway.mp3","/Images/songs/The_Subway.png","The Subway","Chappell Roan"],
               ]
