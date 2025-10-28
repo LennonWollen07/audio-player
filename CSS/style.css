@@ -5,10 +5,10 @@
 * {
     margin: 0;
     font-family:monospace;
-    color: #ffffff;
     box-sizing: border-box;
 }
 
+/* adds margin to all p text */
 p {
     margin: 5px
 }
@@ -23,6 +23,7 @@ body {
     height: 100vh;
     width: 100vw;
     background-color: #363537;
+    color: #ffffff;
 }
 
 /* sets the dimensions of the header */
@@ -101,9 +102,15 @@ footer {
     font-size: 1.5vw;
 }
 
+/* highlight the current song playing */
+.songBox__trackList__track.trackActive {
+    color:#ef2d56;
+    background-color: rgba(239, 45, 86, 0.1);
+}
+
 /* when hovering over a track highlight it */
 .songBox__trackList__track:hover {
-    background-color: rgba(239, 45, 86, 0.2);
+    background-color: rgba(239, 45, 86, 0.25);
 }
 
 /* when clciking on a track highlight it more than hovering */
@@ -127,6 +134,8 @@ footer {
     object-position: center;
 }
 
+
+
 /* FOOTER */
 
 /* container for the buttons in the footer */
@@ -141,15 +150,31 @@ footer {
     height: 30px;
 }
 
+/* when hovering set make the button translucent */
+.footer__containerButton__buttonImage.buttonActive:hover {
+    opacity: 0.8;
+}
+
+/* on button click decrease the size */
+.footer__containerButton__buttonImage.buttonActive:active {
+    height: 25px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+}
+
 /* continer for at the edges of the footer */
 .footer__containerEdges {
     height: 100%;
     width: 15%;
 }
 
-/* add margin to the left edge of the footer */
-.footer__containerEdges.U-flexAlign p {
-    margin-left: 5%;
+.seekBar {
+    appearance: none;
+    margin: 1%;
+    margin-right: 1%;
+    border-radius: 10px;
+    border: #ed7d3a solid 2px;
+    accent-color: #ef2d56;
 }
 
 
@@ -204,13 +229,7 @@ footer {
 
 /* styles the seekbar in the footer */
 #songBar {
-    appearance: none;
     width: 80%;
-    margin: 1%;
-    margin-right: 1%;
-    border-radius: 10px;
-    border: #ed7d3a solid 2px;
-    accent-color: #ef2d56;
 }
 
 /* ensure the background is white when seekbar is disabled */
@@ -220,11 +239,5 @@ footer {
 
 /* styles the seekbar in the footer */
 #soundBar {
-    appearance: none;
     width: 8vw;
-    margin: 1%;
-    margin-right: 1%;
-    border-radius: 10px;
-    border: #ed7d3a solid 2px;
-    accent-color: #ef2d56;
 }

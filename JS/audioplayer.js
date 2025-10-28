@@ -1,15 +1,32 @@
-// variables / constants
+// ----- VARIABLES / CONSTANTS -----
 
 // array of all the songs - song path, image path, name, artist, length (added by onload function)
 const songs = [
+                ["/music/Nobody.mp3","/Images/songs/Nobody.png","Nobody","Mitski"],
+                ["/music/Me_and_Mr_Wolf.mp3","/Images/songs/Me_and_Mr_Wolf.png","Me and Mr Wolf","The Real Tuesday Weld"],
+                ["/music/Sunburn.mp3","/Images/songs/Sunburn.png","Sunburn","The Living Tombstone"],
+                ["/music/World.execute(me).mp3","Images/songs/World.execute(me).png","World.execute(me)","Mili"],
+                ["/music/Pain.mp3","/Images/songs/Pain.png","ペイン(Pain)","MILGRAM"],
                 ["/music/My_Love_is_Sick.mp3","/Images/songs/My_Love_is_Sick.png","My Love is Sick","Madds Buckley"],
-                ["/music/Pain.mp3","/Images/songs/Pain.png","Pain","MILGRAM"],
+                ["/music/The_Subway.mp3","/Images/songs/The_Subway.png","The Subway","Chappell Roan"],
               ]
 
-// FUNCTIONS
+const soundBar = document.getElementById("soundBar")
+
+let currentSongIndex = null;
+let currentSong = null
+let trackRow = null;
+let repeatMode = "repeat"
+let volumeTracker = 1;
+
+
+
+// ----- ANON FUNCTIONS -----
+
+// --- ONLOAD ---
 
 // activates on HTML loading
-// used to create the songbox
+// used to create the songbox tracks
 window.onload = function() {
 
     // gets the tracklist
@@ -22,8 +39,8 @@ window.onload = function() {
         // the template is the HTML for a tracklist row
         trackList.insertAdjacentHTML("beforeend", `
 
-            <!-- track ${i + 1} row -->
-                <div class="songBox__trackList__track U-flexAlignJustify">
+            <!-- track ${i} row -->
+                <div class="songBox__trackList__track U-flexAlignJustify" data-index=${i}>
 
                     <!-- Song id in the the list -->
                     <div class="U-flexAlignJustify U-songBoxColID">
@@ -69,8 +86,6 @@ window.onload = function() {
 
             `)
 
-        // this section adds the data from the songs constant to the track row
-
         // image section
         let trackImage = document.getElementById(`track${i}__image`);
         trackImage.src = songs[i][1];
@@ -96,11 +111,342 @@ window.onload = function() {
             // Length section
             let trackLength = document.getElementById(`track${i}__length`)
             trackLength.innerHTML = songs[i][4];
+
         };
+
     };
+
 };
 
-// TIME FUNCTION
+
+
+// --- MAIN CONTENT ---
+
+// activates when a track is selected
+document.getElementById("songBox__trackList").onclick = function(e) {
+
+    // checks which track has been selected -
+    // works by using the sleected element and working up the nested list
+    // to find the id mentioned below
+    const trackRow = e.target.closest(".songBox__trackList__track");
+
+    // if a row has been selected continue into the if
+    if (trackRow) {
+
+        // gets the index of the track
+        const newIndex = Number(trackRow.dataset.index);
+
+        // activates if a new song is selected
+        if (currentSong && currentSongIndex != newIndex) {
+
+            // pause previous song and set current time to 0
+            currentSong.pause();
+            currentSong.currentTime = 0;
+
+            // get the song via the index and play the song
+            currentSongIndex = newIndex;
+            songChangeHandler();
+            document.getElementById("playButton").src = "/Images/buttons/pause.png";
+            currentSong.play();
+
+        }
+
+        // If the same song is selected
+        else if (currentSong && currentSongIndex === newIndex) {
+
+            // checks if the song should be paused or unpaused
+            if (currentSong.paused) {
+
+                // play if paused
+                document.getElementById("playButton").src = "/Images/buttons/pause.png";
+                currentSong.play();
+            
+            } 
+
+            else {
+
+                // pause if playing
+                document.getElementById("playButton").src = "/Images/buttons/play.png";
+                currentSong.pause();
+
+            };
+
+        }
+
+        // if a song hasent been loaded yet
+        else {
+
+            // get the current index
+            currentSongIndex = newIndex;
+            songChangeHandler();
+
+            // activate footer buttons
+            document.getElementById("playButton").src = "/Images/buttons/pause.png";
+            document.getElementById("playButton").classList.add("buttonActive");
+
+            document.getElementById("previousButton").src = "/Images/buttons/previous.png";
+            document.getElementById("previousButton").classList.add("buttonActive");
+
+            document.getElementById("nextButton").src = "/Images/buttons/next.png";
+            document.getElementById("nextButton").classList.add("buttonActive");
+
+            document.getElementById("repeatButton").src = "/Images/buttons/repeat.png";
+            document.getElementById("repeatButton").classList.add("buttonActive");
+
+            // play the selected song
+            currentSong.play();
+
+        };
+
+    };
+
+};
+
+// --- FOOTER ---
+
+// pause / unpause the song
+document.getElementById("playButton").onclick = function() {
+
+    // if a song has been loaded
+    if (currentSong) {
+
+        // if the song is paused, unpause it
+        if (currentSong.paused) {
+
+            document.getElementById("playButton").src = "/Images/buttons/pause.png";
+            currentSong.play();
+
+        }
+
+        // if song is playing pause it
+        else {
+
+            document.getElementById("playButton").src = "/Images/buttons/play.png";
+            currentSong.pause();
+
+        };
+
+    };
+
+};
+
+
+
+// change track to the previous song if the song is <= 3 seconds into the track
+// otherwise return to start of the song
+document.getElementById("previousButton").onclick = function() {
+
+    // if current song has been loaded
+    if (currentSong) {
+
+        // if the song is <= 3 seconds into the song
+        if (currentSong.currentTime <= 3) {
+
+            // resets the song
+            currentSong.pause();
+            currentSong.currentTime = 0;
+
+            // decreases the index accounting for underflow
+            currentSongIndex = (currentSongIndex + (songs.length - 1)) % songs.length;
+
+            // loads and plays the new song
+            songChangeHandler();
+            document.getElementById("playButton").src = "/Images/buttons/pause.png";
+            currentSong.play();
+
+        }
+
+        // if the song is over 3 seconds into the track reset track
+        else {
+
+            currentSong.currentTime = 0;
+
+        };
+
+    };
+
+};
+
+
+
+// switch to the next song on the list
+document.getElementById("nextButton").onclick = function() {
+
+    // if current song has been loaded
+    if (currentSong) {
+
+        // resets the song
+        currentSong.pause();
+        currentSong.currentTime = 0;
+
+        // increases the index accounting for overflow
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+
+        // loads and plays the new song
+        songChangeHandler();
+        document.getElementById("playButton").src = "/Images/buttons/pause.png";
+        currentSong.play();
+
+    };
+
+};
+
+
+// switch the repeat mode upon clicking the repeat button
+document.getElementById("repeatButton").onclick = function() {
+
+    // if a song has been loaded
+    if (currentSong) {
+
+        // repeat --> one
+        if (repeatMode == "repeat") {
+
+            document.getElementById("repeatButton").src = "/Images/buttons/repeat-one.png";
+            repeatMode = "one";
+
+        }
+
+        // one --> none
+        else if (repeatMode == "one") {
+
+            document.getElementById("repeatButton").src = "/Images/buttons/repeat-none.png";
+            repeatMode = "none";
+
+        }
+
+        // none --> repeat
+        else {
+
+            document.getElementById("repeatButton").src = "/Images/buttons/repeat.png";
+            repeatMode = "repeat";
+
+        };
+
+    };
+
+};
+
+// function that controls the volume
+soundBar.oninput = function() {
+
+    // only lets bar directly control volume if its been loaded
+    if (currentSong) {
+
+        currentSong.volume = soundBar.value / 100;
+
+    };
+
+    // stores the volume for song changes to
+    // maintain consistent volume
+    volumeTracker = soundBar.value / 100
+
+};
+
+
+
+// ----- CALLED FUNCTIONS -----
+
+// gets the current time in the track
+function currentTimeHandler() {
+
+    // gets current time and displays it in footer
+    trackCurrentTime = currentSong.currentTime;
+    document.getElementById("footerCurrentTime").innerHTML = formatTime(trackCurrentTime)
+
+};
+
+// changes static elements in the footer
+function staticFooterChange() {
+
+    //displays total track length and name of the song in the footer
+    document.getElementById("footerTotalTime").innerHTML = songs[currentSongIndex][4]
+    document.getElementById("footerCurrentSong").innerHTML = songs[currentSongIndex][2]
+
+}
+
+// handles repeating
+function repeatHandler() {
+    
+    // repeat mode = repeat
+    if (repeatMode == "repeat") {
+        
+        // resets the song
+        currentSong.pause();
+        currentSong.currentTime = 0;
+
+        // increases the index accounting for overflow
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+
+        // loads and plays the new song
+        songChangeHandler();
+        document.getElementById("playButton").src = "/Images/buttons/pause.png";
+        currentSong.play();
+
+    }
+
+    // repeat mode = one
+    else if (repeatMode == "one") {
+
+        // resets the song
+        currentSong.currentTime = 0;
+        currentSong.play();
+
+    }
+
+    // repeat mode = none
+    else {
+
+        // shows that the song has ended
+        document.getElementById("playButton").src = "/Images/buttons/play.png";
+
+    };
+
+};
+
+// adds styling to the current track being played
+function activateRow() {
+
+    //in every instance of a track ensure it has trackActive removed
+    document.querySelectorAll(".songBox__trackList__track").forEach(track => {
+
+        track.classList.remove("trackActive");
+
+    });
+
+    // find active track
+    const activeTrack = document.querySelector(`.songBox__trackList__track[data-index="${currentSongIndex}"]`);
+
+    //add trackActive to current track
+    if (activeTrack) {
+
+        activeTrack.classList.add("trackActive");
+    
+    };
+
+};
+
+// loads all functions with the new current song and sets footer elements with it
+function songChangeHandler() {
+
+    // load audio
+    currentSong = new Audio(songs[currentSongIndex][0]);
+
+    // sets correct repeat mode
+    currentSong.onended = repeatHandler;
+
+    // keeps track of position in song
+    currentSong.ontimeupdate = currentTimeHandler;
+
+    // updates elements in the footer
+    staticFooterChange();
+
+    // ensures volume dosent reset to max
+    currentSong.volume = volumeTracker;
+
+    // correctly applies styling to the active song
+    activateRow()
+};
+
 // formats time to a human readable number
 function formatTime(secs) {
     let hours = Math.floor(secs / 3600);

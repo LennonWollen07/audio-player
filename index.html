@@ -72,35 +72,34 @@
     <footer>
 
         <!-- current song section -->
-        <div class="footer__containerEdges U-flexAlign">
+        <div class="footer__containerEdges U-flexAlignJustify">
 
-            <p>Playing:</p>
-            <p>None</p>
+            <p id="footerCurrentSong"></p>
 
         </div>
 
         <!-- play/pause and previous song section -->
         <div class="footer__containerButtons U-flexAlign">
 
-            <img src="/Images/buttons/play.png" class="footer__containerButton__buttonImage">
-            <img src="/Images/buttons/previous.png" class="footer__containerButton__buttonImage">
+            <img src="/Images/buttons/play-off.png" class="footer__containerButton__buttonImage" id="playButton">
+            <img src="/Images/buttons/previous-off.png" class="footer__containerButton__buttonImage" id="previousButton">
 
         </div>
 
         <!-- song time and seekbar section -->
         <div class="U-flexAlignJustify" id="footer__containerCenter">
 
-            <p>0:00</p>
-            <input id="songBar" type="range" min="0" value="0" disabled>
-            <p>0:00</p>
+            <p id="footerCurrentTime">0:00</p>
+            <input class="seekBar" id="songBar" type="range" min="0" value="0" disabled>
+            <p id="footerTotalTime">0:00</p>
 
         </div>
 
         <!-- next and repeat button section -->
         <div class="footer__containerButtons U-flexAlign">
 
-            <img src="/Images/buttons/next.png" class="footer__containerButton__buttonImage">
-            <img src="/Images/buttons/repeat-off.png" class="footer__containerButton__buttonImage">
+            <img src="/Images/buttons/next-off.png" class="footer__containerButton__buttonImage" id="nextButton">
+            <img src="/Images/buttons/repeat-off.png" class="footer__containerButton__buttonImage" id="repeatButton">
 
         </div>
         
@@ -108,7 +107,7 @@
         <div class="footer__containerEdges U-flexAlignJustify">
 
             <p>Volume:</p>
-            <input id="soundBar" type="range" min="0" value="0">
+            <input class="seekBar" id="soundBar" type="range" min="0" value="100">
 
         </div>
 
