@@ -128,7 +128,7 @@ window.onload = function() {
 document.getElementById("songBox__trackList").onclick = function(e) {
 
     // checks which track has been selected -
-    // works by using the sleected element and working up the nested list
+    // works by using the selected element and working up the nested list
     // to find the id mentioned below
     const trackRow = e.target.closest(".songBox__trackList__track");
 
@@ -204,6 +204,8 @@ document.getElementById("songBox__trackList").onclick = function(e) {
 
 };
 
+
+
 // --- FOOTER ---
 
 // pause / unpause the song
@@ -231,8 +233,6 @@ document.getElementById("playButton").onclick = function() {
     };
 
 };
-
-
 
 // change track to the previous song if the song is <= 3 seconds into the track
 // otherwise return to start of the song
@@ -269,8 +269,6 @@ document.getElementById("previousButton").onclick = function() {
 
 };
 
-
-
 // switch to the next song on the list
 document.getElementById("nextButton").onclick = function() {
 
@@ -292,7 +290,6 @@ document.getElementById("nextButton").onclick = function() {
     };
 
 };
-
 
 // switch the repeat mode upon clicking the repeat button
 document.getElementById("repeatButton").onclick = function() {
@@ -343,6 +340,8 @@ soundBar.oninput = function() {
     volumeTracker = soundBar.value / 100
 
 };
+
+
 
 // --- SEEKBAR FUNCTIONS ---
 

@@ -170,7 +170,6 @@ footer {
 
 /* defines what the 2 seekbars look like */
 .seekBar {
-    height: 1vw;
     appearance: none;
     margin: 1%;
     margin-right: 1%;
