@@ -90,6 +90,11 @@ footer {
     height: 100%;
 }
 
+/* elements with this class will have a pointer cursor */
+.U_cursor {
+    cursor: pointer;
+}
+
 
 
 /* MAIN CONTENT */
@@ -147,7 +152,7 @@ footer {
 
 /* sets the size of the buttons in the footer */
 .footer__containerButton__buttonImage {
-    height: 50px;
+    height: 2.5vw;
 }
 
 /* when hovering set make the button translucent */
@@ -166,6 +171,7 @@ footer {
 .footer__containerEdges {
     height: 100%;
     width: 15%;
+    text-align: center;
 }
 
 /* defines what the 2 seekbars look like */

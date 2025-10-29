@@ -3,19 +3,27 @@
 // array of all the songs - song path, image path, name, artist, length (added by onload function)
 const songs = [
                 ["/music/Nobody.mp3","/Images/songs/Nobody.png","Nobody","Mitski"],
+                ["/music/Ice_Water.mp3","/Images/songs/Ice_Water.png","Ice Water","Rebecca Sugar"],
                 ["/music/Me_and_Mr_Wolf.mp3","/Images/songs/Me_and_Mr_Wolf.png","Me and Mr Wolf","The Real Tuesday Weld"],
+                ["/music/Mi_Vida_Loca.mp3","/Images/songs/Mi_Vida_Loca.png","Mi Vida Loca","ALNST"],
                 ["/music/Sunburn.mp3","/Images/songs/Sunburn.png","Sunburn","The Living Tombstone"],
                 ["/music/World.execute(me).mp3","Images/songs/World.execute(me).png","World.execute(me)","Mili"],
-                ["/music/Pain.mp3","/Images/songs/Pain.png","ペイン(Pain)","MILGRAM"],
-                ["/music/Changeling.mp3","/Images/songs/Changeling.png","Changeling","Lydia the Bard"],
+                ["/music/Everlasting_Fun.mp3","/Images/songs/Everlasting_Fun.png","Everlasting Fun","LongestSoloEver"],
+                ["/music/Butcher_Vanity.mp3","/Images/songs/Butcher_Vanity.png","Butcher Vanity","Flavour Foley"],
+                ["/music/LoveMeX3.mp3","/Images/songs/LoveMeX3.png","愛して愛して愛して","ADO"],
+                ["/music/Pain.mp3","/Images/songs/Pain.png","ペイン","MILGRAM"],
+                ["/music/Deathly_Loneliness_Attacks.mp3","/Images/songs/Deathly_Loneliness_Attacks.png","Deathly Loneliness Attacks","SirHamnet"],
                 ["/music/My_Love_is_Sick.mp3","/Images/songs/My_Love_is_Sick.png","My Love is Sick","Madds Buckley"],
                 ["/music/The_Subway.mp3","/Images/songs/The_Subway.png","The Subway","Chappell Roan"],
-              ]
+                ["/music/Where_I_Go.mp3","/Images/songs/Where_I_Go.png","Where I Go","Lydia the Bard"],
+                ["/music/Being_Human.mp3","/Images/songs/Being_Human.png","Being Human","Emily King"],
+              ];
 
-const soundBar = document.getElementById("soundBar")
+const songBar = document.getElementById("songBar")
+const soundBar = document.getElementById("soundBar");
 
 let currentSongIndex = null;
-let currentSong = null
+let currentSong = null;
 let trackRow = null;
 let repeatMode = "repeat"
 let volumeTracker = 1;
@@ -180,6 +188,7 @@ document.getElementById("songBox__trackList").onclick = function(e) {
 
             // get the current index
             currentSongIndex = newIndex;
+            songBar.disabled = false
             songChangeHandler();
 
             // activate footer buttons
@@ -341,11 +350,23 @@ soundBar.oninput = function() {
 
 };
 
-
-
 // --- SEEKBAR FUNCTIONS ---
 
+// when the song bar is being interacted with
+songBar.oninput = function() {
 
+    isSeeking = true;
+
+};
+
+// when th eusr has picked a position in the songbar
+songBar.onchange = function() {
+    
+    //set position to the time in song
+    currentSong.currentTime = songBar.value;
+    isSeeking = false;
+
+}
 
 // ----- CALLED FUNCTIONS -----
 
@@ -356,6 +377,9 @@ function currentTimeHandler() {
     trackCurrentTime = currentSong.currentTime;
     document.getElementById("footerCurrentTime").innerHTML = formatTime(trackCurrentTime)
 
+    if(!isSeeking) {
+        songBar.value = Math.floor(currentSong.currentTime)
+    }
 };
 
 // changes static elements in the footer
@@ -440,10 +464,18 @@ function songChangeHandler() {
     // keeps track of position in song
     currentSong.ontimeupdate = currentTimeHandler;
 
+    // sets the max value of the Songbar
+    currentSong.onloadedmetadata = function() {
+
+        songBar.max = Math.floor(currentSong.duration);
+
+    };
+
     // updates elements in the footer
     staticFooterChange();
 
     // ensures volume dosent reset to max
+    
     currentSong.volume = volumeTracker;
 
     // correctly applies styling to the active song
