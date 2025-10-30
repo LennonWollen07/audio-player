@@ -359,7 +359,7 @@ songBar.oninput = function() {
 
 };
 
-// when th eusr has picked a position in the songbar
+// when the uesr has picked a position in the songbar
 songBar.onchange = function() {
     
     //set position to the time in song
