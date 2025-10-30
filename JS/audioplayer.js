@@ -12,7 +12,6 @@ const songs = [
                 ["/music/Butcher_Vanity.mp3","/Images/songs/Butcher_Vanity.png","Butcher Vanity","Flavour Foley"],
                 ["/music/LoveMeX3.mp3","/Images/songs/LoveMeX3.png","愛して愛して愛して","ADO"],
                 ["/music/Pain.mp3","/Images/songs/Pain.png","ペイン","MILGRAM"],
-                ["/music/Deathly_Loneliness_Attacks.mp3","/Images/songs/Deathly_Loneliness_Attacks.png","Deathly Loneliness Attacks","SirHamnet"],
                 ["/music/My_Love_is_Sick.mp3","/Images/songs/My_Love_is_Sick.png","My Love is Sick","Madds Buckley"],
                 ["/music/The_Subway.mp3","/Images/songs/The_Subway.png","The Subway","Chappell Roan"],
                 ["/music/Where_I_Go.mp3","/Images/songs/Where_I_Go.png","Where I Go","Lydia the Bard"],
